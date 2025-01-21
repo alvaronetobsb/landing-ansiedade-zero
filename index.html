@@ -28,7 +28,43 @@
       .border-bronze {
         border-color: #c4a484;
       }
+      .scrollbar-hide {
+        -ms-overflow-style: none; /* IE e Edge */
+        scrollbar-width: none; /* Firefox */
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none; /* Chrome, Safari e Opera */
+      }
     </style>
+
+    <!-- Adicione este script no final do body -->
+    <script>
+      function scrollDepoimentos(direction) {
+        const container = document.getElementById("depoimentos-container");
+        const scrollAmount = container.offsetWidth;
+        if (direction === "left") {
+          container.scrollBy(-scrollAmount, 0);
+        } else {
+          container.scrollBy(scrollAmount, 0);
+        }
+      }
+
+      function goToDepoimento(index) {
+        const container = document.getElementById("depoimentos-container");
+        container.scrollTo({
+          left: container.offsetWidth * index,
+          behavior: "smooth",
+        });
+
+        // Atualiza os indicadores
+        const indicators = document.querySelectorAll(
+          ".flex.justify-center button"
+        );
+        indicators.forEach((indicator, i) => {
+          indicator.classList.toggle("opacity-50", i !== index);
+        });
+      }
+    </script>
   </head>
   <body class="bg-gray-50">
     <!-- Hero Section -->
@@ -1144,35 +1180,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Adicione este script no final do body -->
-    <script>
-      function scrollDepoimentos(direction) {
-        const container = document.getElementById("depoimentos-container");
-        const scrollAmount = container.offsetWidth;
-        if (direction === "left") {
-          container.scrollBy(-scrollAmount, 0);
-        } else {
-          container.scrollBy(scrollAmount, 0);
-        }
-      }
-
-      function goToDepoimento(index) {
-        const container = document.getElementById("depoimentos-container");
-        container.scrollTo({
-          left: container.offsetWidth * index,
-          behavior: "smooth",
-        });
-
-        // Atualiza os indicadores
-        const indicators = document.querySelectorAll(
-          ".flex.justify-center button"
-        );
-        indicators.forEach((indicator, i) => {
-          indicator.classList.toggle("opacity-50", i !== index);
-        });
-      }
-    </script>
 
     <style>
       /* Esconde a scrollbar mas mantém a funcionalidade */
